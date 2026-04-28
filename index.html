@@ -467,14 +467,30 @@ function npSwitch(){logActiveField=logActiveField==='weight'?'reps':'weight';doc
 function npBodyweight(){document.getElementById('logWeight').value='0';logActiveField='reps';document.getElementById('logActiveField').textContent='ENTERING REPS';}
 function npClear(){const f=logActiveField==='weight'?'logWeight':'logReps';document.getElementById(f).value='';}
 function npUndo(){if(!logCtx.exId||logCtx.isWarmup||logCtx.isBurnout){document.getElementById('logModal').classList.remove('show');return;}const ds=getDayStr(logCtx.day);const lk=logCtx.day+'_'+ds;if(state.loggedSets[lk]&&state.loggedSets[lk][logCtx.exId]){const sets=state.loggedSets[lk][logCtx.exId];for(let i=sets.length-1;i>=0;i--){if(sets[i]){sets[i]=null;break;}}saveState();}document.getElementById('logModal').classList.remove('show');renderWorkoutTab();showToast('Last set removed ↩️');}
+const SHEETS_URL='https://script.google.com/macros/s/AKfycbxkcUO01d6b8Q6W7nm1GcUbYZGJUbz5CgDz2SNyx4WhFBkO7wQoxOU7Gw9PPF0rJsbGeA/exec';
+function logToSheets(data){
+  try{
+    fetch(SHEETS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  }catch(e){}
+}
 function confirmLog(){
   const w=parseFloat(document.getElementById('logWeight').value);const r=parseInt(document.getElementById('logReps').value)||0;
   if(isNaN(w)||w<0||!r){showToast('Enter weight (0=BW) and reps');return;}
   const ds=getDayStr(logCtx.day);
-  if(logCtx.isWarmup){save(`warmup_${logCtx.day}_${ds}_${logCtx.exId}`,{weight:w,reps:r});document.getElementById('logModal').classList.remove('show');renderWorkoutTab();showToast(`Warmup: ${w===0?'BW':w+'lb'} × ${r}`);if(!state.vegetaMode)startRestTimer(30);return;}
-  if(logCtx.isBurnout){save(`burnout_${logCtx.day}_${ds}_${logCtx.exId}`,{weight:w,reps:r});document.getElementById('logModal').classList.remove('show');renderWorkoutTab();showToast(`🔥 Burnout: ${w===0?'BW':w+'lb'} × ${r}!`);return;}
+  if(logCtx.isWarmup){
+    save(`warmup_${logCtx.day}_${ds}_${logCtx.exId}`,{weight:w,reps:r});
+    logToSheets({date:ds,day:logCtx.day,exercise:logCtx.exName,setType:'warmup',setNum:'WU',weight:w,reps:r});
+    document.getElementById('logModal').classList.remove('show');renderWorkoutTab();showToast(`Warmup: ${w===0?'BW':w+'lb'} × ${r}`);if(!state.vegetaMode)startRestTimer(30);return;
+  }
+  if(logCtx.isBurnout){
+    save(`burnout_${logCtx.day}_${ds}_${logCtx.exId}`,{weight:w,reps:r});
+    logToSheets({date:ds,day:logCtx.day,exercise:logCtx.exName,setType:'burnout',setNum:'🔥',weight:w,reps:r});
+    document.getElementById('logModal').classList.remove('show');renderWorkoutTab();showToast(`🔥 Burnout: ${w===0?'BW':w+'lb'} × ${r}!`);return;
+  }
   const lk=logCtx.day+'_'+ds;if(!state.loggedSets[lk])state.loggedSets[lk]={};if(!state.loggedSets[lk][logCtx.exId])state.loggedSets[lk][logCtx.exId]=[];
-  state.loggedSets[lk][logCtx.exId][logCtx.setIdx]={weight:w,reps:r};if(w>0)save('w_'+logCtx.exId,w);saveState();document.getElementById('logModal').classList.remove('show');renderWorkoutTab();showToast(`Set ${logCtx.setIdx+1}: ${w===0?'BW':w+'lb'} × ${r}`);
+  state.loggedSets[lk][logCtx.exId][logCtx.setIdx]={weight:w,reps:r};if(w>0)save('w_'+logCtx.exId,w);saveState();
+  logToSheets({date:ds,day:logCtx.day,exercise:logCtx.exName,setType:'working',setNum:logCtx.setIdx+1,weight:w,reps:r});
+  document.getElementById('logModal').classList.remove('show');renderWorkoutTab();showToast(`Set ${logCtx.setIdx+1}: ${w===0?'BW':w+'lb'} × ${r}`);
   if(!state.vegetaMode){const plan=PROGRAM[logCtx.day];let rt=75;if(plan&&plan.supersets)plan.supersets.forEach(ss=>ss.exercises.forEach(ex=>{if(ex.id===logCtx.exId)rt=ss.rest;}));startRestTimer(rt);}
 }
 function addExtraSet(exId,day,ds){const k=`extra_${day}_${ds}_${exId}`;save(k,(load(k,0)+1));renderWorkoutTab();showToast('Extra set added 💪');}
@@ -484,8 +500,8 @@ function closeAddEx(){document.getElementById('addExModal').classList.remove('sh
 function selectMuscle(el){document.querySelectorAll('.muscle-btn').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');addExMuscle=el.textContent;}
 function selectEq(el){document.querySelectorAll('.eq-btn').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');addExEq=el.textContent;}
 function confirmAddExercise(){const name=document.getElementById('addExName').value.trim();if(!name){showToast('Enter exercise name');return;}const sets=parseInt(document.getElementById('addExSets').value)||3;const reps=document.getElementById('addExReps').value||'10';const weight=parseFloat(document.getElementById('addExWeight').value)||0;const viewing=getViewDay();const ds=getDayStr(viewing);const k=viewing+'_'+ds;if(!state.customExercises[k])state.customExercises[k]=[];state.customExercises[k].push({name,muscle:addExMuscle||'Other',equipment:addExEq||'Machine',sets,reps,weight});saveState();closeAddEx();renderWorkoutTab();showToast('Added: '+name+' 💪');}
-function finishWorkout(day){const ds=getDayStr(day);if(!state.completedWorkouts.includes(ds))state.completedWorkouts.push(ds);saveState();renderTodayCard();renderWorkoutTab();renderWeekStrip();showToast('Workout complete! God First 🙏');}
-function logRun(){const ds=getTodayStr();if(!state.completedWorkouts.includes(ds))state.completedWorkouts.push(ds);saveState();renderTodayCard();renderWeekStrip();showToast('Run logged ✓ 🏃');}
+function finishWorkout(day){const ds=getDayStr(day);if(!state.completedWorkouts.includes(ds))state.completedWorkouts.push(ds);saveState();logToSheets({date:ds,day:day,exercise:'WORKOUT COMPLETE',setType:'complete',setNum:'',weight:'',reps:''});renderTodayCard();renderWorkoutTab();renderWeekStrip();showToast('Workout complete! God First 🙏');}
+function logRun(){const ds=getTodayStr();if(!state.completedWorkouts.includes(ds))state.completedWorkouts.push(ds);saveState();logToSheets({date:ds,day:getToday(),exercise:'RUN',setType:'cardio',setNum:'',weight:'',reps:''});renderTodayCard();renderWeekStrip();showToast('Run logged ✓ 🏃');}
 function checkLuna(){const done=state.lunaLog.includes(getTodayStr());document.getElementById('lunaBtn')?.classList.toggle('checked',done);}
 function toggleLuna(){const ds=getTodayStr(),idx=state.lunaLog.indexOf(ds);if(idx>=0)state.lunaLog.splice(idx,1);else state.lunaLog.push(ds);saveState();checkLuna();showToast(idx>=0?'Luna walk removed':'🐶 Luna walk logged!');}
 function checkMondayCheckin(){const el=document.getElementById('mondayCheckin');if(!el)return;const done=state.checkins.find(c=>c.date===getTodayStr());el.style.display=(getToday()==='monday'&&!done)?'block':'none';}
