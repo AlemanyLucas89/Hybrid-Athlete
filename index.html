@@ -356,16 +356,16 @@ tuesday:{name:'Legs',emoji:'🦵',warmup:['Hip circles × 10 each direction','Gl
 {label:'Calf Finisher',rest:45,exercises:[
 {id:'calf_raise',name:'Standing Calf Raise',pattern:'Calf — Volume',sets:4,reps:'20–25',weight:35,equipment:'Dumbbell',swaps:[{name:'Seated Calf Raise',tag:'Machine'},{name:'Calf Press on Leg Press',tag:'Machine'},{name:'Smith Calf Raise',tag:'Smith'}]}]}],
 isometrics:[{name:'Wall Sit Hold',hold:'45s × 2',note:'Back flat, 90° — great marathon prep'},{name:'Single Leg Balance',hold:'30s each',note:'Eyes closed for extra challenge'}]},
-saturday:{name:'Arms & Shoulders',emoji:'💪',warmup:['Wrist circles × 15 each','Band pull-aparts × 15','Light EZ bar curl × 15 (warm)','Light lateral raise × 15'],supersets:[
-{label:'Superset A — Bicep + Tricep',rest:60,exercises:[
+saturday:{name:'Arms & Shoulders',emoji:'💪',warmup:['Wrist circles × 15 each','Band pull-aparts × 15','Light EZ bar curl × 15 (warm)','Light rope pushdown × 15 (warm)'],supersets:[
+{label:'Vegeta Tri-Set A — Bicep → Tricep → Shoulders · Rest 75s',rest:75,exercises:[
 {id:'ez_curl',name:'EZ Bar Curl',pattern:'Bicep — Compound',sets:4,reps:'8–10',weight:90,equipment:'EZ Bar',swaps:[{name:'Barbell Curl',tag:'Barbell'},{name:'Dumbbell Curl',tag:'Dumbbell'},{name:'Cable Curl',tag:'Cable'}]},
-{id:'rope_pushdown',name:'Rope Pushdown',pattern:'Tricep — Cable',sets:4,reps:'10–12',weight:75,equipment:'Cable',swaps:[{name:'Tricep Extension (Dumbbell)',tag:'Dumbbell'},{name:'Machine Tricep Extension',tag:'Machine'},{name:'Overhead Tricep Cable',tag:'Cable'}]}]},
-{label:'Superset B — Hammer + Overhead Tri',rest:60,exercises:[
-{id:'hammer_curl',name:'X Hammer Curl',pattern:'Bicep/Brachialis',sets:3,reps:'10–12',weight:55,equipment:'Dumbbell',swaps:[{name:'Cable Hammer Curl',tag:'Cable'},{name:'Incline Curl',tag:'Dumbbell'},{name:'Preacher Curl (Machine)',tag:'Machine'}]},
+{id:'rope_pushdown',name:'Rope Pushdown',pattern:'Tricep — Cable',sets:4,reps:'10–12',weight:80,equipment:'Cable',swaps:[{name:'Tricep Extension (Dumbbell)',tag:'Dumbbell'},{name:'Machine Tricep Extension',tag:'Machine'},{name:'Overhead Tricep Cable',tag:'Cable'}]},
+{id:'lateral_raise',name:'Lateral Raise',pattern:'Medial Delt — Isolation',sets:3,reps:'12–15',weight:25,equipment:'Dumbbell',swaps:[{name:'Cable Lateral Raise',tag:'Cable'},{name:'Machine Lateral Raise',tag:'Machine'},{name:'Overhead Press (Smith)',tag:'Smith'}]}]},
+{label:'Superset B — Hammer Curl + Overhead Tri · Rest 60s',rest:60,exercises:[
+{id:'hammer_curl',name:'X Hammer Curl',pattern:'Bicep/Brachialis',sets:3,reps:'10–12',weight:50,equipment:'Dumbbell',swaps:[{name:'Cable Hammer Curl',tag:'Cable'},{name:'Incline Curl',tag:'Dumbbell'},{name:'Preacher Curl (Machine)',tag:'Machine'}]},
 {id:'tri_ext',name:'Tricep Extension (Dumbbell)',pattern:'Tricep — Overhead',sets:3,reps:'12–15',weight:35,equipment:'Dumbbell',swaps:[{name:'Overhead Cable Extension',tag:'Cable'},{name:'Machine Extension',tag:'Machine'},{name:'Skull Crusher (EZ)',tag:'EZ Bar'}]}]},
-{label:'Superset C — Shoulders',rest:60,exercises:[
-{id:'lateral_raise',name:'Lateral Raise',pattern:'Medial Delt',sets:3,reps:'12–15',weight:25,equipment:'Dumbbell',swaps:[{name:'Cable Lateral Raise',tag:'Cable'},{name:'Machine Lateral Raise',tag:'Machine'},{name:'Overhead Press (Smith)',tag:'Smith'}]},
-{id:'face_pull',name:'Face Pull',pattern:'Rear Delt + Rotator Cuff',sets:3,reps:'15–20',weight:50,equipment:'Cable',swaps:[{name:'Band Face Pull',tag:'Band'},{name:'Rear Delt Fly (Dumbbell)',tag:'Dumbbell'},{name:'Reverse Pec Deck',tag:'Machine'}]}]}],
+{label:'Finisher — Face Pull · Rest 45s',rest:45,exercises:[
+{id:'face_pull',name:'Face Pull',pattern:'Rear Delt + Rotator Cuff',sets:3,reps:'15–20',weight:35,equipment:'Cable',swaps:[{name:'Band Face Pull',tag:'Band'},{name:'Rear Delt Fly (Dumbbell)',tag:'Dumbbell'},{name:'Reverse Pec Deck',tag:'Machine'}]}]}],
 isometrics:[{name:'Isometric Bicep Hold',hold:'10s × 3',note:'Hold at peak contraction on last curl set'},{name:'Dead Hang',hold:'30s',note:'Shoulder decompression — always after pressing'}]},
 wednesday:{name:'Easy Run Day',emoji:'🏃',isRun:true,desc:'2–3 miles easy pace. Flush Tuesday legs. Keep it conversational.',tips:['Zone 2 — conversational pace only','Great day for a longer Luna walk 🐶','Focus on breathing rhythm, not speed','Dynamic stretch after — hip flexors especially']},
 friday:{name:'Social Run — 4 Miles',emoji:'🏃‍♂️',isRun:true,desc:'4 miles with your crew. Medium-hard effort. Let the group set the pace.',tips:['Legs had 3 days recovery from Tuesday ✅','Stay hydrated 💧','Community time — enjoy it 🙏','Marathon 2027 training starts here 🗺️']},
@@ -452,7 +452,32 @@ function startRestTimer(seconds){
   restInterval=setInterval(()=>{restRemaining--;count.textContent=restRemaining;fill.style.width=Math.max(0,(restRemaining/restTotal)*100)+'%';if(restRemaining<=0){clearInterval(restInterval);bar.classList.add('hidden');playBell();showToast('Rest done — GO! 💪');}},1000);
 }
 function skipRest(){if(restInterval)clearInterval(restInterval);document.getElementById('restBar').classList.add('hidden');}
-function playBell(){try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator();const g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.setValueAtTime(880,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(440,ctx.currentTime+0.5);g.gain.setValueAtTime(0.3,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.8);o.start(ctx.currentTime);o.stop(ctx.currentTime+0.8);}catch(e){}}
+function playBell(){
+  // 1. Vibrate — works with headphones, silent mode, everything
+  if(navigator.vibrate) navigator.vibrate([300,100,300,100,300]);
+  // 2. Screen flash — always visible
+  document.body.style.transition='background .1s';
+  document.body.style.background='rgba(201,168,76,0.3)';
+  setTimeout(()=>document.body.style.background='',200);
+  // 3. Audio — try to play through whatever output is active
+  try{
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    ctx.resume().then(()=>{
+      // Play two tones so it cuts through headphones
+      [880,660].forEach((freq,i)=>{
+        const o=ctx.createOscillator();
+        const g=ctx.createGain();
+        o.connect(g);g.connect(ctx.destination);
+        o.type='sine';
+        o.frequency.value=freq;
+        g.gain.setValueAtTime(0.6,ctx.currentTime+(i*0.25));
+        g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+(i*0.25)+0.4);
+        o.start(ctx.currentTime+(i*0.25));
+        o.stop(ctx.currentTime+(i*0.25)+0.4);
+      });
+    });
+  }catch(e){}
+}
 let swapCtx={};
 function openSwap(exId,day,si,ei){const ex=PROGRAM[day].supersets[si].exercises[ei];swapCtx={exId,ex};document.getElementById('swapTitle').textContent='Swap: '+ex.name;const current=state.exerciseSwaps[exId]||ex.name;let html=`<div class="swap-option ${current===ex.name?'current':''}" onclick="selectSwap('${ex.name}')"><div class="swap-name">${ex.name}</div><div class="swap-tag">Original</div></div>`;ex.swaps.forEach(s=>{html+=`<div class="swap-option ${current===s.name?'current':''}" onclick="selectSwap('${s.name}')"><div class="swap-name">${s.name}</div><div class="swap-tag">${s.tag}</div></div>`;});document.getElementById('swapOptions').innerHTML=html;document.getElementById('swapModal').classList.add('show');}
 function selectSwap(name){state.exerciseSwaps[swapCtx.exId]=name;saveState();closeSwap();renderWorkoutTab();showToast('Swapped to '+name);}
@@ -502,8 +527,31 @@ function selectEq(el){document.querySelectorAll('.eq-btn').forEach(b=>b.classLis
 function confirmAddExercise(){const name=document.getElementById('addExName').value.trim();if(!name){showToast('Enter exercise name');return;}const sets=parseInt(document.getElementById('addExSets').value)||3;const reps=document.getElementById('addExReps').value||'10';const weight=parseFloat(document.getElementById('addExWeight').value)||0;const viewing=getViewDay();const ds=getDayStr(viewing);const k=viewing+'_'+ds;if(!state.customExercises[k])state.customExercises[k]=[];state.customExercises[k].push({name,muscle:addExMuscle||'Other',equipment:addExEq||'Machine',sets,reps,weight});saveState();closeAddEx();renderWorkoutTab();showToast('Added: '+name+' 💪');}
 function finishWorkout(day){const ds=getDayStr(day);if(!state.completedWorkouts.includes(ds))state.completedWorkouts.push(ds);saveState();logToSheets({date:ds,day:day,exercise:'WORKOUT COMPLETE',setType:'complete',setNum:'',weight:'',reps:''});renderTodayCard();renderWorkoutTab();renderWeekStrip();showToast('Workout complete! God First 🙏');}
 function logRun(){const ds=getTodayStr();if(!state.completedWorkouts.includes(ds))state.completedWorkouts.push(ds);saveState();logToSheets({date:ds,day:getToday(),exercise:'RUN',setType:'cardio',setNum:'',weight:'',reps:''});renderTodayCard();renderWeekStrip();showToast('Run logged ✓ 🏃');}
-function checkLuna(){const done=state.lunaLog.includes(getTodayStr());document.getElementById('lunaBtn')?.classList.toggle('checked',done);}
-function toggleLuna(){const ds=getTodayStr(),idx=state.lunaLog.indexOf(ds);if(idx>=0)state.lunaLog.splice(idx,1);else state.lunaLog.push(ds);saveState();checkLuna();showToast(idx>=0?'Luna walk removed':'🐶 Luna walk logged!');}
+function checkLuna(){
+  const ds=getTodayStr();
+  const done=state.lunaLog.includes(ds);
+  const btn=document.getElementById('lunaBtn');
+  if(btn){
+    btn.classList.toggle('checked',done);
+    btn.textContent=done?'✅':'🐾';
+    btn.title=done?'Luna walked today! Tap to undo':'Tap to log Luna walk';
+  }
+  // Also update checkin row label to show streak
+  const streak=state.lunaLog.filter(d=>{
+    const diff=Math.abs(new Date(getTodayStr())-new Date(d));
+    return diff<7*86400000;
+  }).length;
+  const label=document.querySelector('.checkin-row div');
+  if(label) label.textContent=`🐶 Luna walk today${streak>1?' ('+streak+' this week)':''}`;
+}
+function toggleLuna(){
+  const ds=getTodayStr();
+  const idx=state.lunaLog.indexOf(ds);
+  if(idx>=0)state.lunaLog.splice(idx,1);
+  else state.lunaLog.push(ds);
+  saveState();checkLuna();
+  showToast(idx>=0?'Luna walk removed':'🐶 Luna walk logged!');
+}
 function checkMondayCheckin(){const el=document.getElementById('mondayCheckin');if(!el)return;const done=state.checkins.find(c=>c.date===getTodayStr());el.style.display=(getToday()==='monday'&&!done)?'block':'none';}
 let checkinData={rating:0,pain:[],hit:''};
 function setRating(n){checkinData.rating=n;for(let i=1;i<=5;i++)document.getElementById('r'+i).classList.toggle('selected',i===n);}
