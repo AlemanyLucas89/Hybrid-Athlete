@@ -337,35 +337,36 @@ let state={loggedSets:load('loggedSets',{}),weights:load('weights',[]),lunaLog:l
 function saveState(){save('loggedSets',state.loggedSets);save('weights',state.weights);save('lunaLog',state.lunaLog);save('checkins',state.checkins);save('exerciseSwaps',state.exerciseSwaps);save('completedWorkouts',state.completedWorkouts);save('customExercises',state.customExercises);save('vegetaMode',state.vegetaMode);}
 const PROGRAM={
 monday:{name:'Chest & Back',emoji:'💪',warmup:['Band pull-aparts × 15','Shoulder circles × 10 each','Light cable row × 15 (warm)'],supersets:[
-{label:'Superset A — Primary Push/Pull',rest:90,exercises:[
-{id:'smith_incline',name:'Smith Incline Bench Press',pattern:'Horizontal Push',sets:4,reps:'6–8',weight:170,equipment:'Smith Machine',swaps:[{name:'Smith Flat Bench Press',tag:'Smith'},{name:'Incline Dumbbell Press',tag:'Dumbbell'},{name:'Hammer Machine Press',tag:'Machine'}]},
-{id:'iso_row',name:'ISO Hammer Row',pattern:'Horizontal Pull',sets:4,reps:'8–10',weight:100,equipment:'Machine',swaps:[{name:'Bent Over Row (Smith)',tag:'Smith'},{name:'Seated Cable Row',tag:'Cable'},{name:'Dumbbell Row',tag:'Dumbbell'}]}]},
+{label:'Superset A — Primary Push/Pull · Week 2 ⬆️',rest:90,exercises:[
+{id:'smith_incline',name:'Smith Incline Bench Press',pattern:'Horizontal Push — Week 2: 165lb target',sets:4,reps:'6–8',weight:165,equipment:'Smith Machine',swaps:[{name:'Smith Flat Bench Press',tag:'Smith'},{name:'Incline Dumbbell Press',tag:'Dumbbell'},{name:'Hammer Machine Press',tag:'Machine'}]},
+{id:'iso_row',name:'ISO Hammer Row',pattern:'Horizontal Pull — Week 2: 110lb target',sets:4,reps:'8–10',weight:110,equipment:'Machine',swaps:[{name:'Bent Over Row (Smith)',tag:'Smith'},{name:'Seated Cable Row',tag:'Cable'},{name:'Dumbbell Row',tag:'Dumbbell'}]}]},
 {label:'Superset B — Secondary Push/Pull',rest:75,exercises:[
 {id:'underhand_pd',name:'Underhand Pulldown',pattern:'Vertical Pull',sets:3,reps:'8–10',weight:175,equipment:'Cable',swaps:[{name:'Lat Pulldown',tag:'Cable'},{name:'Assisted Pull-up',tag:'Machine'},{name:'Straight Arm Pulldown',tag:'Cable'}]},
-{id:'bent_row',name:'Bent Over Row (Smith)',pattern:'Horizontal Pull',sets:3,reps:'8–10',weight:155,equipment:'Smith Machine',swaps:[{name:'Seated Cable Row',tag:'Cable'},{name:'Machine Row',tag:'Machine'},{name:'Dumbbell Row',tag:'Dumbbell'}]}]},
-{label:'Core Finisher',rest:60,exercises:[
-{id:'cable_crunch',name:'Cable Crunch',pattern:'Core',sets:3,reps:'10–12',weight:100,equipment:'Cable',swaps:[{name:'Ab Machine Crunch',tag:'Machine'},{name:'Dead Bug × 12',tag:'Bodyweight'},{name:'Hollow Hold 30s',tag:'Isometric'}]}]}],
+{id:'bent_row',name:'Bent Over Row (Smith) + 1s pause',pattern:'Horizontal Pull — pause at top',sets:3,reps:'8–10',weight:150,equipment:'Smith Machine',swaps:[{name:'Seated Cable Row',tag:'Cable'},{name:'Machine Row',tag:'Machine'},{name:'Dumbbell Row',tag:'Dumbbell'}]}]},
+{label:'Core + Push Finisher',rest:60,exercises:[
+{id:'cable_crunch',name:'Cable Crunch',pattern:'Core',sets:3,reps:'10–12',weight:100,equipment:'Cable',swaps:[{name:'Ab Machine Crunch',tag:'Machine'},{name:'Dead Bug × 12',tag:'Bodyweight'},{name:'Hollow Hold 30s',tag:'Isometric'}]},
+{id:'paused_pushup',name:'Paused Push-ups (2s hold)',pattern:'Chest — Bodyweight finisher',sets:3,reps:'10–15',weight:0,equipment:'Bodyweight',swaps:[{name:'Regular Push-ups',tag:'Bodyweight'},{name:'Diamond Push-ups',tag:'Bodyweight'},{name:'Archer Push-ups',tag:'Bodyweight'}]}]}],
 isometrics:[{name:'Dead Hang',hold:'30s',note:'Decompress spine — after every chest day'},{name:'Isometric Chest Squeeze',hold:'10s × 3',note:'Press palms together at peak contraction'}]},
 tuesday:{name:'Legs',emoji:'🦵',warmup:['Hip circles × 10 each direction','Glute bridge × 15','Bodyweight RDL × 10','Leg swing × 10 each leg'],supersets:[
-{label:'Superset A — Primary Compound',rest:120,exercises:[
-{id:'bulgarian',name:'Bulgarian Split Squat (Smith)',pattern:'Unilateral Quad/Glute',sets:4,reps:'6–8 each',weight:120,equipment:'Smith Machine',swaps:[{name:'Smith Squat',tag:'Smith'},{name:'Leg Press',tag:'Machine'},{name:'Step Up (Dumbbell)',tag:'Dumbbell'}]},
-{id:'rdl',name:'Romanian Deadlift (Smith)',pattern:'Hip Hinge',sets:4,reps:'8–10',weight:155,equipment:'Smith Machine',swaps:[{name:'Cable Pull-Through',tag:'Cable'},{name:'Dumbbell RDL',tag:'Dumbbell'},{name:'Seated Leg Curl',tag:'Machine'}]}]},
+{label:'Superset A — Primary Compound · Week 2 ⬆️',rest:120,exercises:[
+{id:'bulgarian',name:'Bulgarian Split Squat (Smith)',pattern:'Unilateral Quad/Glute — Week 2: 130lb',sets:4,reps:'6–8 each',weight:130,equipment:'Smith Machine',swaps:[{name:'Smith Squat',tag:'Smith'},{name:'Leg Press',tag:'Machine'},{name:'Step Up (Dumbbell)',tag:'Dumbbell'}]},
+{id:'rdl',name:'Romanian Deadlift (Smith)',pattern:'Hip Hinge — Week 2: 165lb',sets:4,reps:'8–10',weight:165,equipment:'Smith Machine',swaps:[{name:'Cable Pull-Through',tag:'Cable'},{name:'Dumbbell RDL',tag:'Dumbbell'},{name:'Seated Leg Curl',tag:'Machine'}]}]},
 {label:'Superset B — Isolation + Power',rest:75,exercises:[
 {id:'leg_curl',name:'Seated Leg Curl',pattern:'Hamstring Isolation',sets:3,reps:'10–12',weight:115,equipment:'Machine',swaps:[{name:'Lying Leg Curl',tag:'Machine'},{name:'Nordic Curl (assisted)',tag:'Bodyweight'},{name:'Single Leg Curl',tag:'Machine'}]},
 {id:'speed_rdl',name:'Speed RDL — Explosive',pattern:'Hip Power',sets:3,reps:'10 fast',weight:95,equipment:'Smith Machine',swaps:[{name:'Cable Pull-Through (fast)',tag:'Cable'},{name:'Hip Thrust (explosive)',tag:'Bodyweight'},{name:'Goblet Squat',tag:'Dumbbell'}]}]},
-{label:'Calf Finisher',rest:45,exercises:[
-{id:'calf_raise',name:'Standing Calf Raise',pattern:'Calf — Volume',sets:4,reps:'20–25',weight:35,equipment:'Dumbbell',swaps:[{name:'Seated Calf Raise',tag:'Machine'},{name:'Calf Press on Leg Press',tag:'Machine'},{name:'Smith Calf Raise',tag:'Smith'}]}]}],
+{label:'Calf Finisher — Consistent Weight',rest:45,exercises:[
+{id:'calf_raise',name:'Standing Calf Raise',pattern:'Calf — 60lb all sets Week 2',sets:4,reps:'20–25',weight:60,equipment:'Dumbbell',swaps:[{name:'Seated Calf Raise',tag:'Machine'},{name:'Calf Press on Leg Press',tag:'Machine'},{name:'Smith Calf Raise',tag:'Smith'}]}]}],
 isometrics:[{name:'Wall Sit Hold',hold:'45s × 2',note:'Back flat, 90° — great marathon prep'},{name:'Single Leg Balance',hold:'30s each',note:'Eyes closed for extra challenge'}]},
 saturday:{name:'Arms & Shoulders',emoji:'💪',warmup:['Wrist circles × 15 each','Band pull-aparts × 15','Light EZ bar curl × 15 (warm)','Light rope pushdown × 15 (warm)'],supersets:[
-{label:'Vegeta Tri-Set A — Bicep → Tricep → Shoulders · Rest 75s',rest:75,exercises:[
-{id:'ez_curl',name:'EZ Bar Curl',pattern:'Bicep — Compound',sets:4,reps:'8–10',weight:90,equipment:'EZ Bar',swaps:[{name:'Barbell Curl',tag:'Barbell'},{name:'Dumbbell Curl',tag:'Dumbbell'},{name:'Cable Curl',tag:'Cable'}]},
-{id:'rope_pushdown',name:'Rope Pushdown',pattern:'Tricep — Cable',sets:4,reps:'10–12',weight:80,equipment:'Cable',swaps:[{name:'Tricep Extension (Dumbbell)',tag:'Dumbbell'},{name:'Machine Tricep Extension',tag:'Machine'},{name:'Overhead Tricep Cable',tag:'Cable'}]},
-{id:'lateral_raise',name:'Lateral Raise',pattern:'Medial Delt — Isolation',sets:3,reps:'12–15',weight:25,equipment:'Dumbbell',swaps:[{name:'Cable Lateral Raise',tag:'Cable'},{name:'Machine Lateral Raise',tag:'Machine'},{name:'Overhead Press (Smith)',tag:'Smith'}]}]},
-{label:'Superset B — Hammer Curl + Overhead Tri · Rest 60s',rest:60,exercises:[
-{id:'hammer_curl',name:'X Hammer Curl',pattern:'Bicep/Brachialis',sets:3,reps:'10–12',weight:50,equipment:'Dumbbell',swaps:[{name:'Cable Hammer Curl',tag:'Cable'},{name:'Incline Curl',tag:'Dumbbell'},{name:'Preacher Curl (Machine)',tag:'Machine'}]},
-{id:'tri_ext',name:'Tricep Extension (Dumbbell)',pattern:'Tricep — Overhead',sets:3,reps:'12–15',weight:35,equipment:'Dumbbell',swaps:[{name:'Overhead Cable Extension',tag:'Cable'},{name:'Machine Extension',tag:'Machine'},{name:'Skull Crusher (EZ)',tag:'EZ Bar'}]}]},
-{label:'Finisher — Face Pull · Rest 45s',rest:45,exercises:[
-{id:'face_pull',name:'Face Pull',pattern:'Rear Delt + Rotator Cuff',sets:3,reps:'15–20',weight:35,equipment:'Cable',swaps:[{name:'Band Face Pull',tag:'Band'},{name:'Rear Delt Fly (Dumbbell)',tag:'Dumbbell'},{name:'Reverse Pec Deck',tag:'Machine'}]}]}],
+{label:'Vegeta Tri-Set A — Bicep → Tricep → Shoulders · Week 2 ⬆️',rest:75,exercises:[
+{id:'ez_curl',name:'EZ Bar Curl',pattern:'Bicep — Week 2: 95lb target',sets:4,reps:'8–10',weight:95,equipment:'EZ Bar',swaps:[{name:'Barbell Curl',tag:'Barbell'},{name:'Dumbbell Curl',tag:'Dumbbell'},{name:'Cable Curl',tag:'Cable'}]},
+{id:'rope_pushdown',name:'Rope Pushdown',pattern:'Tricep — 80lb, aim 12 reps every set',sets:4,reps:'12',weight:80,equipment:'Cable',swaps:[{name:'Tricep Extension (Dumbbell)',tag:'Dumbbell'},{name:'Machine Tricep Extension',tag:'Machine'},{name:'Overhead Tricep Cable',tag:'Cable'}]},
+{id:'lateral_raise',name:'Lateral Raise',pattern:'Medial Delt — keep 25lb, clean form',sets:3,reps:'12–15',weight:25,equipment:'Dumbbell',swaps:[{name:'Cable Lateral Raise',tag:'Cable'},{name:'Machine Lateral Raise',tag:'Machine'},{name:'Overhead Press (Smith)',tag:'Smith'}]}]},
+{label:'Superset B — Hammer Curl + Overhead Tri · Week 2',rest:60,exercises:[
+{id:'hammer_curl',name:'X Hammer Curl',pattern:'Bicep/Brachialis — 45lb clean reps',sets:3,reps:'10–12',weight:45,equipment:'Dumbbell',swaps:[{name:'Cable Hammer Curl',tag:'Cable'},{name:'Incline Curl',tag:'Dumbbell'},{name:'Preacher Curl (Machine)',tag:'Machine'}]},
+{id:'tri_ext',name:'Tricep Extension (Dumbbell)',pattern:'Tricep — Week 2: 40lb target',sets:3,reps:'12–15',weight:40,equipment:'Dumbbell',swaps:[{name:'Overhead Cable Extension',tag:'Cable'},{name:'Machine Extension',tag:'Machine'},{name:'Skull Crusher (EZ)',tag:'EZ Bar'}]}]},
+{label:'Finisher — Face Pull · Week 2 ⬆️',rest:45,exercises:[
+{id:'face_pull',name:'Face Pull',pattern:'Rear Delt — Week 2: 40lb target',sets:3,reps:'15–20',weight:40,equipment:'Cable',swaps:[{name:'Band Face Pull',tag:'Band'},{name:'Rear Delt Fly (Dumbbell)',tag:'Dumbbell'},{name:'Reverse Pec Deck',tag:'Machine'}]}]}],
 isometrics:[{name:'Isometric Bicep Hold',hold:'10s × 3',note:'Hold at peak contraction on last curl set'},{name:'Dead Hang',hold:'30s',note:'Shoulder decompression — always after pressing'}]},
 wednesday:{name:'Easy Run Day',emoji:'🏃',isRun:true,desc:'2–3 miles easy pace. Flush Tuesday legs. Keep it conversational.',tips:['Zone 2 — conversational pace only','Great day for a longer Luna walk 🐶','Focus on breathing rhythm, not speed','Dynamic stretch after — hip flexors especially']},
 friday:{name:'Social Run — 4 Miles',emoji:'🏃‍♂️',isRun:true,desc:'4 miles with your crew. Medium-hard effort. Let the group set the pace.',tips:['Legs had 3 days recovery from Tuesday ✅','Stay hydrated 💧','Community time — enjoy it 🙏','Marathon 2027 training starts here 🗺️']},
