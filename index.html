@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -338,24 +339,25 @@ function saveState(){save('loggedSets',state.loggedSets);save('weights',state.we
 const PROGRAM={
 monday:{name:'Chest & Back',emoji:'💪',warmup:['Band pull-aparts × 15','Shoulder circles × 10 each','Light cable row × 15 (warm)'],supersets:[
 {label:'Superset A — Primary Push/Pull · Week 2 ⬆️',rest:90,exercises:[
-{id:'smith_incline',name:'Smith Incline Bench Press',pattern:'Horizontal Push — Week 2: 165lb target',sets:4,reps:'6–8',weight:165,equipment:'Smith Machine',swaps:[{name:'Smith Flat Bench Press',tag:'Smith'},{name:'Incline Dumbbell Press',tag:'Dumbbell'},{name:'Hammer Machine Press',tag:'Machine'}]},
-{id:'iso_row',name:'ISO Hammer Row',pattern:'Horizontal Pull — Week 2: 110lb target',sets:4,reps:'8–10',weight:110,equipment:'Machine',swaps:[{name:'Bent Over Row (Smith)',tag:'Smith'},{name:'Seated Cable Row',tag:'Cable'},{name:'Dumbbell Row',tag:'Dumbbell'}]}]},
+{id:'smith_incline',name:'Smith Incline Bench Press',pattern:'Horizontal Push — Week 2: 165lb target',sets:4,reps:'6–8',weight:165,equipment:'Smith Machine',swaps:[{name:'Incline Dumbbell Press',tag:'Dumbbell',weight:70},{name:'Smith Flat Bench Press',tag:'Smith',weight:165},{name:'Cable Chest Fly',tag:'Cable',weight:50}]},
+{id:'iso_row',name:'ISO Hammer Row',pattern:'Horizontal Pull — Week 2: 110lb target',sets:4,reps:'8–10',weight:110,equipment:'Machine',swaps:[{name:'Hammer Strength Lateral Row',tag:'Machine',weight:90},{name:'Bent Over Row (Barbell)',tag:'Barbell',weight:135},{name:'Seated Cable Row',tag:'Cable',weight:140}]}]},
 {label:'Superset B — Secondary Push/Pull',rest:75,exercises:[
-{id:'underhand_pd',name:'Underhand Pulldown',pattern:'Vertical Pull',sets:3,reps:'8–10',weight:175,equipment:'Cable',swaps:[{name:'Lat Pulldown',tag:'Cable'},{name:'Assisted Pull-up',tag:'Machine'},{name:'Straight Arm Pulldown',tag:'Cable'}]},
-{id:'bent_row',name:'Bent Over Row (Smith) + 1s pause',pattern:'Horizontal Pull — pause at top',sets:3,reps:'8–10',weight:150,equipment:'Smith Machine',swaps:[{name:'Seated Cable Row',tag:'Cable'},{name:'Machine Row',tag:'Machine'},{name:'Dumbbell Row',tag:'Dumbbell'}]}]},
+{id:'underhand_pd',name:'Underhand Pulldown',pattern:'Vertical Pull',sets:3,reps:'8–10',weight:175,equipment:'Cable',swaps:[{name:'Lat Pulldown',tag:'Cable',weight:175},{name:'Pull-ups',tag:'Bodyweight',weight:0},{name:'Straight Arm Pulldown',tag:'Cable',weight:100}]},
+{id:'bent_row',name:'Bent Over Row (Smith) + 1s pause',pattern:'Horizontal Pull — pause at top',sets:3,reps:'8–10',weight:150,equipment:'Smith Machine',swaps:[{name:'Bent Over Row (Barbell)',tag:'Barbell',weight:135},{name:'Seated Cable Row',tag:'Cable',weight:140},{name:'Dumbbell Row',tag:'Dumbbell',weight:70}]}]},
 {label:'Core + Push Finisher',rest:60,exercises:[
-{id:'cable_crunch',name:'Cable Crunch',pattern:'Core',sets:3,reps:'10–12',weight:100,equipment:'Cable',swaps:[{name:'Ab Machine Crunch',tag:'Machine'},{name:'Dead Bug × 12',tag:'Bodyweight'},{name:'Hollow Hold 30s',tag:'Isometric'}]},
-{id:'paused_pushup',name:'Paused Push-ups (2s hold)',pattern:'Chest — Bodyweight finisher',sets:3,reps:'10–15',weight:0,equipment:'Bodyweight',swaps:[{name:'Regular Push-ups',tag:'Bodyweight'},{name:'Diamond Push-ups',tag:'Bodyweight'},{name:'Archer Push-ups',tag:'Bodyweight'}]}]}],
+{id:'cable_crunch',name:'Cable Crunch',pattern:'Core',sets:3,reps:'10–12',weight:100,equipment:'Cable',swaps:[{name:'Ab Machine Crunch',tag:'Machine',weight:100},{name:'Dead Bug × 12',tag:'Bodyweight',weight:0},{name:'Hollow Hold 30s',tag:'Isometric',weight:0}]},
+{id:'paused_pushup',name:'Paused Push-ups (2s hold)',pattern:'Chest — Bodyweight finisher',sets:3,reps:'10–15',weight:0,equipment:'Bodyweight',swaps:[{name:'Regular Push-ups',tag:'Bodyweight',weight:0},{name:'Diamond Push-ups',tag:'Bodyweight',weight:0},{name:'Hammer Strength Chest Press',tag:'Machine',weight:90}]}]}],
 isometrics:[{name:'Dead Hang',hold:'30s',note:'Decompress spine — after every chest day'},{name:'Isometric Chest Squeeze',hold:'10s × 3',note:'Press palms together at peak contraction'}]},
 tuesday:{name:'Legs',emoji:'🦵',warmup:['Hip circles × 10 each direction','Glute bridge × 15','Bodyweight RDL × 10','Leg swing × 10 each leg'],supersets:[
-{label:'Superset A — Primary Compound · Week 2 ⬆️',rest:120,exercises:[
-{id:'bulgarian',name:'Bulgarian Split Squat (Smith)',pattern:'Unilateral Quad/Glute — Week 2: 130lb',sets:4,reps:'6–8 each',weight:130,equipment:'Smith Machine',swaps:[{name:'Smith Squat',tag:'Smith'},{name:'Leg Press',tag:'Machine'},{name:'Step Up (Dumbbell)',tag:'Dumbbell'}]},
-{id:'rdl',name:'Romanian Deadlift (Smith)',pattern:'Hip Hinge — Week 2: 165lb',sets:4,reps:'8–10',weight:165,equipment:'Smith Machine',swaps:[{name:'Cable Pull-Through',tag:'Cable'},{name:'Dumbbell RDL',tag:'Dumbbell'},{name:'Seated Leg Curl',tag:'Machine'}]}]},
-{label:'Superset B — Isolation + Power',rest:75,exercises:[
-{id:'leg_curl',name:'Seated Leg Curl',pattern:'Hamstring Isolation',sets:3,reps:'10–12',weight:115,equipment:'Machine',swaps:[{name:'Lying Leg Curl',tag:'Machine'},{name:'Nordic Curl (assisted)',tag:'Bodyweight'},{name:'Single Leg Curl',tag:'Machine'}]},
-{id:'speed_rdl',name:'Speed RDL — Explosive',pattern:'Hip Power',sets:3,reps:'10 fast',weight:95,equipment:'Smith Machine',swaps:[{name:'Cable Pull-Through (fast)',tag:'Cable'},{name:'Hip Thrust (explosive)',tag:'Bodyweight'},{name:'Goblet Squat',tag:'Dumbbell'}]}]},
-{label:'Calf Finisher — Consistent Weight',rest:45,exercises:[
-{id:'calf_raise',name:'Standing Calf Raise',pattern:'Calf — 60lb all sets Week 2',sets:4,reps:'20–25',weight:60,equipment:'Dumbbell',swaps:[{name:'Seated Calf Raise',tag:'Machine'},{name:'Calf Press on Leg Press',tag:'Machine'},{name:'Smith Calf Raise',tag:'Smith'}]}]}],
+{label:'Superset A — Bulgarian Split Squat + Leg Curl',rest:90,exercises:[
+{id:'bulgarian',name:'Bulgarian Split Squat (Smith)',pattern:'Unilateral Quad/Glute — Week 2: 130lb',sets:4,reps:'6–8 each',weight:130,equipment:'Smith Machine',swaps:[{name:'Smith Squat',tag:'Smith',weight:130},{name:'Leg Press',tag:'Machine',weight:200},{name:'Step Up (Dumbbell)',tag:'Dumbbell',weight:50}]},
+{id:'leg_curl',name:'Seated Leg Curl',pattern:'Hamstring — Light superset',sets:4,reps:'10–12',weight:115,equipment:'Machine',swaps:[{name:'Lying Leg Curl',tag:'Machine',weight:100},{name:'Nordic Curl (assisted)',tag:'Bodyweight',weight:0},{name:'Single Leg Curl',tag:'Machine',weight:60}]}]},
+{label:'Superset B — RDL + Leg Extension',rest:90,exercises:[
+{id:'rdl',name:'Romanian Deadlift (Smith)',pattern:'Hip Hinge — Week 2: 165lb',sets:4,reps:'8–10',weight:165,equipment:'Smith Machine',swaps:[{name:'Cable Pull-Through',tag:'Cable',weight:80},{name:'Dumbbell RDL',tag:'Dumbbell',weight:70},{name:'Hip Thrust (Smith)',tag:'Smith',weight:135}]},
+{id:'leg_ext',name:'Leg Extension',pattern:'Quad Isolation — superset with RDL',sets:4,reps:'12–15',weight:100,equipment:'Machine',swaps:[{name:'Wall Sit Hold 45s',tag:'Isometric',weight:0},{name:'Goblet Squat',tag:'Dumbbell',weight:50},{name:'Cable Squat',tag:'Cable',weight:80}]}]},
+{label:'Explosive + Calf Finisher',rest:45,exercises:[
+{id:'speed_rdl',name:'Speed RDL — Explosive',pattern:'Hip Power',sets:3,reps:'10 fast',weight:95,equipment:'Smith Machine',swaps:[{name:'Cable Pull-Through (fast)',tag:'Cable',weight:60},{name:'Hip Thrust (explosive)',tag:'Bodyweight',weight:0},{name:'Goblet Squat',tag:'Dumbbell',weight:50}]},
+{id:'calf_raise',name:'Standing Calf Raise',pattern:'Calf — 60lb all sets',sets:4,reps:'20–25',weight:60,equipment:'Dumbbell',swaps:[{name:'Seated Calf Raise',tag:'Machine',weight:80},{name:'Calf Press on Leg Press',tag:'Machine',weight:120},{name:'Smith Calf Raise',tag:'Smith',weight:90}]}]}],
 isometrics:[{name:'Wall Sit Hold',hold:'45s × 2',note:'Back flat, 90° — great marathon prep'},{name:'Single Leg Balance',hold:'30s each',note:'Eyes closed for extra challenge'}]},
 saturday:{name:'Arms & Shoulders',emoji:'💪',warmup:['Wrist circles × 15 each','Band pull-aparts × 15','Light EZ bar curl × 15 (warm)','Light rope pushdown × 15 (warm)'],supersets:[
 {label:'Vegeta Tri-Set A — Bicep → Tricep → Shoulders · Week 2 ⬆️',rest:75,exercises:[
@@ -406,7 +408,11 @@ function renderTodayCard(){
   const ds=getDayStr(viewing),done=state.completedWorkouts.includes(ds);const ss=plan.supersets,tot=ss.reduce((a,s)=>a+s.exercises.reduce((b,e)=>b+e.sets,0),0);
   el.innerHTML=`<div class="today-card"><div class="today-header"><div class="today-label">${plan.emoji} ${plan.name}</div><div class="today-day">${dayLabel} · 30 MIN</div></div><div class="today-body"><div class="today-desc">${ss.length} supersets · ${tot} sets · Warmup included</div>${done?`<div class="complete-banner"><h3>WORKOUT DONE ✓</h3><p>Rest up. Come back strong.</p></div>`:`<button class="start-btn" onclick="showTab('workout')">START WORKOUT →</button>`}</div></div>`;
 }
-function getSuggestedWeight(ex){return load('w_'+ex.id,ex.weight);}
+function getSuggestedWeight(ex){
+  // If swapped, use the swap's suggested weight first, then fall back to personal history, then default
+  const swapW=load('w_swp_'+ex.id, null);
+  return load('w_'+ex.id, swapW!==null ? swapW : ex.weight);
+}
 function renderWorkoutTab(){
   const viewing=getViewDay(),today=getToday(),plan=PROGRAM[viewing];const el=document.getElementById('workoutContent');
   if(!plan||plan.isSabbath||plan.isRest){el.innerHTML=`<div style="text-align:center;padding:60px 20px;color:var(--muted);"><div style="font-size:48px;margin-bottom:16px;">${plan?plan.emoji:'✝️'}</div><div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold);margin-bottom:8px;">${plan?plan.name:'Rest'}</div><div style="font-size:13px;line-height:1.6;">${plan?plan.desc:''}</div></div>`;return;}
@@ -417,6 +423,14 @@ function renderWorkoutTab(){
   const doneSets=Object.values(logs).reduce((a,v)=>a+(Array.isArray(v)?v.filter(x=>x&&x.weight!==undefined).length:0),0);
   const pct=totalSets?Math.round((doneSets/totalSets)*100):0;const done=state.completedWorkouts.includes(ds);
   let html=`<div class="workout-header"><div class="workout-title">${plan.emoji} ${plan.name}${!isToday?' · '+viewing.toUpperCase():''}</div><div class="workout-meta">${ds}</div><div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%"></div></div><div class="progress-label">${doneSets}/${totalSets} sets complete</div></div>`;
+  // Fasted / Fed toggle
+  const fastedKey='fasted_'+viewing+'_'+ds;
+  const fastedState=load(fastedKey,'');
+  html+=`<div style="display:flex;gap:8px;margin-bottom:14px;">
+    <div style="font-size:13px;color:var(--muted);display:flex;align-items:center;margin-right:4px;">Trained:</div>
+    <button onclick="setFasted('fasted','${viewing}','${ds}')" style="flex:1;padding:10px;border-radius:8px;border:2px solid ${fastedState==='fasted'?'var(--gold)':'var(--border)'};background:${fastedState==='fasted'?'rgba(201,168,76,.15)':'var(--surface2)'};color:${fastedState==='fasted'?'var(--gold)':'var(--muted)'};font-size:13px;font-weight:600;cursor:pointer;">⚡ Fasted</button>
+    <button onclick="setFasted('fed','${viewing}','${ds}')" style="flex:1;padding:10px;border-radius:8px;border:2px solid ${fastedState==='fed'?'var(--green)':'var(--border)'};background:${fastedState==='fed'?'rgba(76,175,114,.15)':'var(--surface2)'};color:${fastedState==='fed'?'var(--green)':'var(--muted)'};font-size:13px;font-weight:600;cursor:pointer;">🍳 Fed</button>
+  </div>`;
   html+=`<div class="vegeta-toggle"><div class="vegeta-label">⚡ <span>Vegeta Mode</span> — A→B then rest</div><div class="toggle-track ${state.vegetaMode?'on':''}" onclick="toggleVegeta()"><div class="toggle-thumb"></div></div></div>`;
   html+=`<div class="superset-block"><div class="superset-label">🔥 Warmup — 3 min</div>${plan.warmup.map(w=>`<div class="exercise-row" style="font-size:13px;color:var(--muted);padding:10px 16px;">· ${w}</div>`).join('')}</div>`;
   plan.supersets.forEach((ss,si)=>{
@@ -480,8 +494,30 @@ function playBell(){
   }catch(e){}
 }
 let swapCtx={};
-function openSwap(exId,day,si,ei){const ex=PROGRAM[day].supersets[si].exercises[ei];swapCtx={exId,ex};document.getElementById('swapTitle').textContent='Swap: '+ex.name;const current=state.exerciseSwaps[exId]||ex.name;let html=`<div class="swap-option ${current===ex.name?'current':''}" onclick="selectSwap('${ex.name}')"><div class="swap-name">${ex.name}</div><div class="swap-tag">Original</div></div>`;ex.swaps.forEach(s=>{html+=`<div class="swap-option ${current===s.name?'current':''}" onclick="selectSwap('${s.name}')"><div class="swap-name">${s.name}</div><div class="swap-tag">${s.tag}</div></div>`;});document.getElementById('swapOptions').innerHTML=html;document.getElementById('swapModal').classList.add('show');}
-function selectSwap(name){state.exerciseSwaps[swapCtx.exId]=name;saveState();closeSwap();renderWorkoutTab();showToast('Swapped to '+name);}
+function openSwap(exId,day,si,ei){
+  const ex=PROGRAM[day].supersets[si].exercises[ei];
+  swapCtx={exId,ex};
+  document.getElementById('swapTitle').textContent='Swap: '+ex.name;
+  const current=state.exerciseSwaps[exId]||ex.name;
+  let html=`<div class="swap-option ${current===ex.name?'current':''}" onclick="selectSwap('${ex.name}',${ex.weight})"><div class="swap-name">${ex.name}</div><div class="swap-tag">Original</div></div>`;
+  ex.swaps.forEach(s=>{
+    const sw=s.weight!==undefined?s.weight:ex.weight;
+    html+=`<div class="swap-option ${current===s.name?'current':''}" onclick="selectSwap('${s.name}',${sw})"><div class="swap-name">${s.name}</div><div class="swap-tag">${s.tag}</div></div>`;
+  });
+  document.getElementById('swapOptions').innerHTML=html;
+  document.getElementById('swapModal').classList.add('show');
+}
+function selectSwap(name,swapWeight){
+  state.exerciseSwaps[swapCtx.exId]=name;
+  // Save the swap's suggested weight so it shows correctly
+  if(swapWeight!==undefined && swapWeight!==null){
+    const currentStored=load('w_'+swapCtx.exId, null);
+    // Only update if no personal history exists for this exercise yet
+    if(currentStored===null) save('w_swp_'+swapCtx.exId, swapWeight);
+    else save('w_swp_'+swapCtx.exId, swapWeight);
+  }
+  saveState();closeSwap();renderWorkoutTab();showToast('Swapped to '+name);
+}
 function closeSwap(){document.getElementById('swapModal').classList.remove('show');}
 let logCtx={},logActiveField='weight';
 function openLog(exId,setIdx,exName,day,suggestedW,suggestedR){logCtx={exId,setIdx,exName,day,suggestedW,suggestedR};logActiveField='weight';document.getElementById('logExName').textContent=exName;document.getElementById('logSetLabel').textContent='Set '+(typeof setIdx==='number'?setIdx+1:setIdx);document.getElementById('logWeight').value=suggestedW;document.getElementById('logReps').value=suggestedR;document.getElementById('logActiveField').textContent='ENTERING WEIGHT';document.getElementById('logModal').classList.add('show');}
@@ -496,7 +532,11 @@ function npUndo(){if(!logCtx.exId||logCtx.isWarmup||logCtx.isBurnout){document.g
 const SHEETS_URL='https://script.google.com/macros/s/AKfycbxkcUO01d6b8Q6W7nm1GcUbYZGJUbz5CgDz2SNyx4WhFBkO7wQoxOU7Gw9PPF0rJsbGeA/exec';
 function logToSheets(data){
   try{
-    fetch(SHEETS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    // Use no-cors mode — required for Google Apps Script from browser web apps
+    fetch(SHEETS_URL+'?data='+encodeURIComponent(JSON.stringify(data)),{
+      method:'GET',
+      mode:'no-cors'
+    });
   }catch(e){}
 }
 function confirmLog(){
@@ -526,7 +566,20 @@ function closeAddEx(){document.getElementById('addExModal').classList.remove('sh
 function selectMuscle(el){document.querySelectorAll('.muscle-btn').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');addExMuscle=el.textContent;}
 function selectEq(el){document.querySelectorAll('.eq-btn').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');addExEq=el.textContent;}
 function confirmAddExercise(){const name=document.getElementById('addExName').value.trim();if(!name){showToast('Enter exercise name');return;}const sets=parseInt(document.getElementById('addExSets').value)||3;const reps=document.getElementById('addExReps').value||'10';const weight=parseFloat(document.getElementById('addExWeight').value)||0;const viewing=getViewDay();const ds=getDayStr(viewing);const k=viewing+'_'+ds;if(!state.customExercises[k])state.customExercises[k]=[];state.customExercises[k].push({name,muscle:addExMuscle||'Other',equipment:addExEq||'Machine',sets,reps,weight});saveState();closeAddEx();renderWorkoutTab();showToast('Added: '+name+' 💪');}
-function finishWorkout(day){const ds=getDayStr(day);if(!state.completedWorkouts.includes(ds))state.completedWorkouts.push(ds);saveState();logToSheets({date:ds,day:day,exercise:'WORKOUT COMPLETE',setType:'complete',setNum:'',weight:'',reps:''});renderTodayCard();renderWorkoutTab();renderWeekStrip();showToast('Workout complete! God First 🙏');}
+function setFasted(val,day,ds){
+  save('fasted_'+day+'_'+ds, val);
+  renderWorkoutTab();
+  showToast(val==='fasted'?'⚡ Fasted logged':'🍳 Fed logged');
+}
+function finishWorkout(day){
+  const ds=getDayStr(day);
+  if(!state.completedWorkouts.includes(ds))state.completedWorkouts.push(ds);
+  saveState();
+  const fastedState=load('fasted_'+day+'_'+ds,'not logged');
+  logToSheets({date:ds,day:day,exercise:'WORKOUT COMPLETE',setType:'complete',setNum:'',weight:'',reps:'',notes:'Trained: '+fastedState});
+  renderTodayCard();renderWorkoutTab();renderWeekStrip();
+  showToast('Workout complete! God First 🙏');
+}
 function logRun(){const ds=getTodayStr();if(!state.completedWorkouts.includes(ds))state.completedWorkouts.push(ds);saveState();logToSheets({date:ds,day:getToday(),exercise:'RUN',setType:'cardio',setNum:'',weight:'',reps:''});renderTodayCard();renderWeekStrip();showToast('Run logged ✓ 🏃');}
 function checkLuna(){
   const ds=getTodayStr();
@@ -568,5 +621,6 @@ document.getElementById('logModal').addEventListener('click',function(e){if(e.ta
 document.getElementById('addExModal').addEventListener('click',function(e){if(e.target===this)closeAddEx();});
 initPin();
 </script>
+
 </body>
 </html>
